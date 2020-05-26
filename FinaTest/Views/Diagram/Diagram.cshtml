@@ -1,0 +1,101 @@
+﻿@model IEnumerable<FinaTest.Models.ProductModelStr>
+
+<div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">დასახელება</th>
+                <th scope="col">2020-05-01</th>
+                <th scope="col">2020-05-02</th>
+                <th scope="col">2020-05-03</th>
+                <th scope="col">2020-05-04</th>
+                <th scope="col">2020-05-05</th>
+                <th scope="col">2020-05-06</th>
+                <th scope="col">2020-05-07</th>
+                <th scope="col">2020-05-08</th>
+                <th scope="col">2020-05-09</th>
+                <th scope="col">2020-05-10</th>
+
+                <th scope="col">2020-05-11</th>
+                <th scope="col">2020-05-12</th>
+                <th scope="col">2020-05-13</th>
+                <th scope="col">2020-05-14</th>
+                <th scope="col">2020-05-15</th>
+                <th scope="col">2020-05-16</th>
+                <th scope="col">2020-05-17</th>
+                <th scope="col">2020-05-18</th>
+                <th scope="col">2020-05-19</th>
+                <th scope="col">2020-05-20</th>
+
+                <th scope="col">2020-05-21</th>
+                <th scope="col">2020-05-22</th>
+                <th scope="col">2020-05-23</th>
+                <th scope="col">2020-05-24</th>
+                <th scope="col">2020-05-25</th>
+                <th scope="col">2020-05-26</th>
+                <th scope="col">2020-05-27</th>
+                <th scope="col">2020-05-28</th>
+                <th scope="col">2020-05-29</th>
+                <th scope="col">2020-05-30</th>
+
+
+            </tr>
+        </thead>
+        <tbody id="tbodypro">
+
+            @{
+                List<string> exps = new List<string>() {
+
+                "2020-05-01","2020-05-02","2020-05-03","2020-05-04","2020-05-05","2020-05-06","2020-05-07","2020-05-08","2020-05-09","2020-05-10",
+                "2020-05-11","2020-05-12","2020-05-13","2020-05-14","2020-05-15","2020-05-16","2020-05-17","2020-05-18","2020-05-19","2020-05-20",
+                "2020-05-21","2020-05-22","2020-05-23","2020-05-24","2020-05-25","2020-05-26","2020-05-27","2020-05-28","2020-05-29","2020-05-30",
+
+                };
+
+
+
+
+            }
+
+
+            @foreach (var item in Model)
+            {
+                var style = "";
+                <tr>
+                    <th>@item.Name</th>
+
+
+                    @for (int i = 0; i < 30; i++)
+                    {
+                        if (item.StartDate == exps[i])
+                        {
+                           
+                            <td style="background-color:#0c9713">@item.StartDate </td>
+                             style = "style=background-color:#a4fa58";
+                        }
+                        else if (item.CompletionDate == exps[i])
+                        {
+                           
+                            <td style="background-color:#ff0000">@item.CompletionDate </td>
+                             style = "";
+                        }
+                        else
+                        {
+                            <td @style></td>
+                        }
+
+
+                    }
+
+
+
+
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+</div>
+
+

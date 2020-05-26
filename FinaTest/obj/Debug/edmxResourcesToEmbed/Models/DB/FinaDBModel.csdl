@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FinaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="FinaEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Grups" EntityType="FinaModel.Grup" />
+    <EntitySet Name="categories" EntityType="FinaModel.category" />
+    <AssociationSet Name="FK_category_Grup" Association="FinaModel.FK_category_Grup">
+      <End Role="Grup" EntitySet="Grups" />
+      <End Role="category" EntitySet="categories" />
+    </AssociationSet>
+    <EntitySet Name="Products" EntityType="FinaModel.Product" />
+    <AssociationSet Name="FK_Product_category" Association="FinaModel.FK_Product_category">
+      <End Role="category" EntitySet="categories" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Grup">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="categories" Relationship="FinaModel.FK_category_Grup" FromRole="Grup" ToRole="category" />
+  </EntityType>
+  <EntityType Name="category">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="categoryName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="GrupID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Grup" Relationship="FinaModel.FK_category_Grup" FromRole="category" ToRole="Grup" />
+    <NavigationProperty Name="Products" Relationship="FinaModel.FK_Product_category" FromRole="category" ToRole="Product" />
+  </EntityType>
+  <Association Name="FK_category_Grup">
+    <End Type="FinaModel.Grup" Role="Grup" Multiplicity="1" />
+    <End Type="FinaModel.category" Role="category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Grup">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="category">
+        <PropertyRef Name="GrupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Decimal" Precision="18" Scale="1" />
+    <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="startDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="CompletionDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="CategoryId" Type="Int32" />
+    <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="category" Relationship="FinaModel.FK_Product_category" FromRole="Product" ToRole="category" />
+  </EntityType>
+  <Association Name="FK_Product_category">
+    <End Type="FinaModel.category" Role="category" Multiplicity="0..1" />
+    <End Type="FinaModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="category">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

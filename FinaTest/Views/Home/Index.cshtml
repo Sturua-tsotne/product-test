@@ -1,0 +1,220 @@
+﻿@model IEnumerable<FinaTest.Models.HomeViewModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+
+@* პროდუცტის რედაცტირება *@
+
+@* კატეგორია *@
+<div class="AddCategoryopap hide-item" id="AddCategoryopap">
+    <div class="card">
+        <div class="card-body">
+            <img  class="icons" id="CloseCategorygrupopap" src="~/Content/icons/clear-24px.svg" />
+
+            <h5 class="card-title">კატეგორის დამატება</h5>
+            <input type="text" id="addCategory" class="form-control" name="addCategory" placeholder="კატეგორის სახელი" />
+            <button class="btn btn-primary Categorygrubutton">
+                შენახვა
+                <img class="icons" src="~/Content/icons/keyboard_arrow_down-24px.svg" />
+
+            </button>
+            <p id="erroren">შეავსეთ ველი </p>
+        </div>
+    </div>
+</div>
+
+@* პროდუცტის დამატება *@
+
+<div class="addproductopap hide-item" id="addproductopap">
+    <form action="/Home/Addproduct" method="post">
+        <div class="form-row">
+            <img class="icons" style="margin-left:440px" id="Closeproductopap" src="~/Content/icons/clear-24px.svg" />
+            <div class="form-group  row">
+                <label for="Code" class="col-sm-2 col-form-label">კოდი</label>
+                <div class="col-sm-10">
+                    <input type="number" id="Code" class="form-control" name="Code" value="კოდი" />
+                </div>
+            </div>
+            <div class="form-group row ">
+                <label for="Code" class="col-sm-2 col-form-label">სახელი</label>
+                <div class="col-sm-10">
+                    <input type="text" id="Name" name="Name" class="form-control" placeholder="სახელი" />
+                </div>
+            </div>
+            <div class="form-group  row">
+                <label for="country" class="col-sm-2 col-form-label">ქვეყანა</label>
+                <div class="col-sm-10">
+                    <select id="country" name="country" class="form-control">
+                        <option selected>საქართველო</option>
+                        <option>ამერიკა</option>
+                        <option>თურქეთი</option>
+                        <option>იტალია</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row ">
+                <label for="Price" class="col-sm-2 col-form-label">ფასი</label>
+                <div class="col-sm-10">
+                    <input type="text" id="Price" class="form-control" name="Price" placeholder="ფასი" />
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="startDate" class="col-form-label">შექმნის თარიღი</label>
+                <input type="date" id="startDate" name="startDate" />
+            </div>
+            <div class="form-group col-md-6">
+                <label for="CompletionDate" class="col-form-label">შექმნის თარიღი</label>
+                <input type="date" id="CompletionDate" name="CompletionDate" />
+            </div>
+
+        </div>
+        <input type="text" id="inputaddprodu" hidden name="CategoryId" />
+        <button type="submit" class="btn btn-primary productseiv">შენახვა</button>
+
+
+    </form>
+
+</div>
+
+
+
+@* ჯგუფის დამატება *@
+
+<div class="Addgrupopap hide-item" id="Addgrupopap">
+    <div class="card">
+        <div class="card-body">
+            <img class="icons" id="CloseAddgrupopap" src="~/Content/icons/clear-24px.svg" />
+
+            <h5 class="card-title">ჯგუფი დამატება</h5>
+            <input type="text" id="add-grup" class="form-control" name="add-grup" placeholder="ჯგუფი სახელი" />
+            <button id="savedgrup" class="btn btn-primary Addgrubutton">
+                შენახვა
+                <img class="icons" src="~/Content/icons/keyboard_arrow_down-24px.svg" />
+
+            </button>
+            <p id="erroren">შეავსეთ ველი </p>
+        </div>
+    </div>
+</div>
+
+<div class="editgrupopap hide-item" id="editgrupopap">
+    <div class="card">
+        <div class="card-body">
+            <img class="icons" id="Closeeditgrupopap" src="~/Content/icons/clear-24px.svg" />
+
+            <h5 class="card-title">ჯგუფი რედაცტირება</h5>
+            <input type="text" id="edit-grup" class="form-control" name="add-grup" />
+            <button class="btn btn-primary Addgrubutton editgrup">
+                შენახვა
+                <img class="icons" src="~/Content/icons/keyboard_arrow_down-24px.svg" />
+            </button>
+            <p id="erroren">შეავსეთ ველი </p>
+        </div>
+    </div>
+</div>
+
+<div class="deleteopap hide-item">
+    <p>დარწმუნებული ხართ რომ გსურთ წაშლა?</p>
+    <button class="deletyes"> დიახ </button>
+    <button class="deletno"> არ მსურს წაშლა</button>
+</div>
+<div class="deletCategoryeopap hide-item">
+    <p>დარწმუნებული ხართ რომ გსურთ წაშლა?</p>
+    <button class="deletyesCategory"> დიახ </button>
+    <button class="deletnoCategory"> არ მსურს წაშლა</button>
+</div>
+
+<div class="sidenav card">
+    <div class="card-header">
+        <h5>პროდუქტი</h5>
+        <img id="addgrup" class="icons" src="~/Content/icons/add-24px.svg" />
+    </div>
+    <div class="dropdown">
+        @foreach (var item in Model)
+        {
+            <ul>
+                <li>
+                    <div style="margin-left:-20px">
+                        <div class="row">
+                            <div class="col-lg-4" style="display:flex">
+                                <div clas="grupName" style="cursor:pointer;" data-atribut="@item.GrupId">@item.GrupName</div>
+                                <button>
+                                    <img class="opening" id="@item.GrupId" src="~/Content/icons/keyboard_arrow_down-24px.svg" />
+                                </button>
+                            </div>
+                            <div class="col-lg-5" style="margin-left:45px">
+                                <div class="iconlistGrup" id="iconlistGrup">
+                                    <img class="icons addproduct" id="@item.GrupId" src="~/Content/icons/add-24px.svg" />
+                                    <img class="icons deletegrup" id="@item.GrupId" src="~/Content/icons/delete_sweep-24px.svg" />
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <ul class="category hide-item" id="OP_@item.GrupId" data-atribut="@item.GrupId">
+                        @foreach (var i in item.Category)
+                        {
+                            <li style="margin-left:-30px">
+                                <span class="openproduct" id="@i.CategoryId">@i.CategoryName</span>
+                                <div class="iconlistcategory" id="iconlistcategory" style="margin-left: 113px; margin-top: -19px;">
+                                    <img class="icons addcategory" id="@i.CategoryId" src="~/Content/icons/add-24px.svg" />
+                                    <img class="icons deletecategory" id="@i.CategoryId" src="~/Content/icons/delete_sweep-24px.svg" />
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                </li>
+            </ul>
+        }
+
+    </div>
+
+</div>
+
+<div class="main">
+    <a class="diagram hide-item" >
+        <button >დიაგრამა</button>
+    </a>
+  
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">კოდი</th>
+                <th scope="col">დასახელება</th>
+                <th scope="col">ფასი</th>
+                <th scope="col">ქვეყანა</th>
+                <th scope="col">დაწყების თარიღი</th>
+                <th scope="col">დასრულების თარიღი</th>
+            </tr>
+        </thead>
+        <tbody id="tbodypro">
+
+            @*<tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>mdo</td>
+                <td>O</td>
+                <td>@ViewBag.data</td>
+                <td>
+                    <a href="/Home/_Editproducticon/7">
+                        <img class="icons editproducticonNNN" id="7" src="../Content/icons/create-24px.svg" />
+                    </a>
+                </td>
+                <td>
+                    <a href="/Home/deleproducticon/7">
+                        <img class="icons editproducticonNNN" id="" src="../Content/icons/delete_sweep-24px.svg" />
+                    </a>
+                </td>
+            </tr>*@
+
+        </tbody>
+    </table>
+
+
+</div>
+
